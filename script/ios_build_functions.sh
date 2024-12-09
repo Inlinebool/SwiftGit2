@@ -8,7 +8,7 @@ function setup_build_environment ()
     # augment path to help it find cmake installed in /usr/local/bin,
     # e.g. via brew. Xcode's Run Script phase doesn't seem to honor
     # ~/.MacOSX/environment.plist
-    PATH="/usr/local/bin:/opt/boxen/homebrew/bin:$PATH"
+    PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 
     pushd "$SCRIPT_DIR/.." > /dev/null
     ROOT_PATH="$PWD"
@@ -39,12 +39,12 @@ function setup_build_environment ()
         CAN_BUILD_64BIT="1"
     fi
 
-    ARCHS="i386 armv7 armv7s"
+    ARCHS=""
     if [ "${CAN_BUILD_64BIT}" -eq "1" ]
     then
         # For some stupid reason cmake needs simulator
         # builds to be first
-        ARCHS="x86_64 ${ARCHS} arm64"
+        ARCHS="${ARCHS} arm64"
     fi
 }
 
